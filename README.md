@@ -123,7 +123,7 @@ My background in the automotive industry and music production also gives me a un
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=PMvita&show_icons=true&theme=radical)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=PMvita&layout=compact&theme=radical)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=PMvita&layout=pie&theme=radical)
 
 </div>
 
@@ -132,9 +132,13 @@ My background in the automotive industry and music production also gives me a un
 ## 🌟 Featured Projects
 
 ### Intrusion Detection System
-[![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=Intrusion-Detection-System_App&theme=radical)](https://github.com/Pmvita/Intrusion-Detection-System_App)
+A security system that uses machine learning to detect potential intrusions in a network. Built using Python with real-time monitoring capabilities.
+
+[![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=Intrusion-Detection-System_App&theme=tokyonight)](https://github.com/Pmvita/Intrusion-Detection-System_App)
 
 ### Full-Stack Mobile App
+This project is a cross-platform Social media, messaging, and crypto wallet app built using React Native and Expo.
+
 [![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=OneSocial-supabase&theme=radical)](https://github.com/Pmvita/OneSocial-supabase)
 
 ---
