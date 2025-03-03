@@ -132,7 +132,7 @@ My background in the automotive industry and music production also gives me a un
 ## 🌟 Featured Projects
 
 ### Intrusion Detection System
-A security system that uses machine learning to detect potential intrusions in a network. Built using Python with real-time monitoring capabilities.
+A lightweight Python-based Intrusion Detection System that monitors network traffic, system logs, and port scanning activities to detect potential security threats.
 
 [![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=Intrusion-Detection-System_App&theme=tokyonight)](https://github.com/Pmvita/Intrusion-Detection-System_App)
 
