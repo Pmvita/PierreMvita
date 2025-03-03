@@ -143,6 +143,6 @@ Software Engineer passionate about creating innovative solutions and building im
 
 <div align="center">
 
-![Profile Views](https://komarev.com/ghpvc/?username=PierreMvita&color=blueviolet)
+![Profile Views](https://komarev.com/ghpvc/?username=PMvita&color=blueviolet)
 
 </div>
