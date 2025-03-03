@@ -24,13 +24,19 @@
       - [Additional Tools \& Technologies](#additional-tools--technologies)
   - [📦 GitHub Stats](#-github-stats)
   - [🌟 Featured Projects](#-featured-projects)
-    - [Project 1](#project-1)
+    - [Intrusion Detection System](#intrusion-detection-system)
     - [Full-Stack Mobile App](#full-stack-mobile-app)
   - [📫 Get in Touch](#-get-in-touch)
 
 ## About Me 🚀
 
-Software Engineer passionate about creating innovative solutions and building impactful applications. I love exploring new technologies and contributing to open-source projects.
+I’m Pierre Mvita, a dedicated Full Stack Developer and Cybersecurity professional with a strong foundation in both web and mobile development. My journey has been shaped by a diverse technical background, from building full-stack applications to exploring cloud security and blockchain technology.
+
+I am passionate about leveraging the latest technologies to build secure, scalable, and user-friendly applications. With expertise in React.js, Next.js, Node.js, and mobile app development using React Native and Expo, I focus on creating seamless user experiences. In addition, I have hands-on experience in backend technologies like Firebase, Supabase, and SQL/NoSQL databases.
+
+Cybersecurity is another area I am deeply committed to. Currently pursuing certifications in CompTIA Security+, AWS Cloud Practitioner, and Microsoft Azure Fundamentals, I aim to help organizations build robust, secure infrastructures. I also have experience integrating encryption, identity, and access management (IAM) systems, and applying security best practices in cloud environments.
+
+My background in the automotive industry and music production also gives me a unique perspective in tackling problems, ensuring creativity and technical precision in my work. I am always eager to learn and grow, contributing to innovative projects that solve real-world problems in both the tech and cybersecurity fields.
 
 ---
 
@@ -125,8 +131,8 @@ Software Engineer passionate about creating innovative solutions and building im
 
 ## 🌟 Featured Projects
 
-### Project 1
-[![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=project-1&theme=radical)](https://github.com/PierreMvita/project-1)
+### Intrusion Detection System
+[![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=Intrusion-Detection-System_App&theme=radical)](https://github.com/Pmvita/Intrusion-Detection-System_App)
 
 ### Full-Stack Mobile App
 [![Project Card](https://github-readme-stats.vercel.app/api/pin/?username=PMvita&repo=OneSocial-supabase&theme=radical)](https://github.com/Pmvita/OneSocial-supabase)
