@@ -63,60 +63,6 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📝 Customization
-
-### Personal Information
-
-Update the following in `app/page.tsx`:
-
-1. **Name**: Replace "Pierre Mvita" with your name
-2. **Email**: Update the email address in the contact section
-3. **Phone**: Update the phone number in the contact section
-4. **Social Links**: Update GitHub and LinkedIn URLs
-5. **About Section**: Modify the about me content
-6. **Skills**: Update the skills and technologies you know
-7. **Projects**: Replace with your actual projects
-8. **Experience**: Update with your work experience
-
-### Styling
-
-- Colors can be customized in the Tailwind classes
-- The primary color scheme uses blue (`blue-600`) - you can change this to match your brand
-- Animations can be adjusted in the Framer Motion components
-
-### Images
-
-- Replace project images with your actual project screenshots
-- Add your profile picture if desired
-- Update favicon and other static assets
-
-## 🚀 Deployment to Vercel
-
-### Option 1: Deploy via Vercel Dashboard
-
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com) and sign in
-3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel will automatically detect it's a Next.js project
-6. Click "Deploy"
-
-### Option 2: Deploy via Vercel CLI
-
-1. Install Vercel CLI:
-```bash
-npm i -g vercel
-```
-
-2. Login to Vercel:
-```bash
-vercel login
-```
-
-3. Deploy:
-```bash
-vercel
-```
 
 ### Environment Variables
 
@@ -162,5 +108,3 @@ Feel free to fork this project and customize it for your own portfolio. If you f
 
 
 ---
-
-Built with ❤️ using Next.js, TypeScript, and Tailwind CSS
