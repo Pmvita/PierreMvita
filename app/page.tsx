@@ -320,7 +320,7 @@ export default function Home() {
                 title: "SecureNet",
                 description: "Real-time network defence. Enterprise-grade intelligence. One dashboard. AI-powered cybersecurity platform with live network discovery and threat detection.",
                 technologies: ["Python", "Machine Learning", "AI", "Network Security", "Cybersecurity"],
-                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop",
+                image: "/SecureNet.png",
                 github: "https://github.com/Pmvita/SecureNet",
                 live: "#"
               },
@@ -328,7 +328,7 @@ export default function Home() {
                 title: "OneSocial-supabase",
                 description: "Cross-platform social media, messaging, and crypto wallet app built using React Native and Expo with Supabase backend.",
                 technologies: ["React Native", "Expo", "TypeScript", "Supabase", "Crypto Wallet"],
-                image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
+                image: "/OneSocial.png",
                 github: "https://github.com/Pmvita/OneSocial-supabase",
                 live: "#"
               },
