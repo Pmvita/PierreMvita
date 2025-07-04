@@ -336,7 +336,7 @@ export default function Home() {
                 title: "AWS CSPM",
                 description: "Terraform configuration for AWS Cloud Security Management with Lambda, CloudWatch, GuardDuty, and SecurityHub for monitoring and remediating security threats.",
                 technologies: ["Terraform", "AWS", "Lambda", "CloudWatch", "GuardDuty", "SecurityHub"],
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+                image: "/AWS-CSPM.gif",
                 github: "https://github.com/Pmvita/aws-CSPM",
                 live: "#"
               },
@@ -344,7 +344,7 @@ export default function Home() {
                 title: "Network Packet Sniffer",
                 description: "Python-based tool for capturing and analyzing network traffic in real-time with GUI for monitoring packets and detecting suspicious activity.",
                 technologies: ["Python", "Network Analysis", "GUI", "Packet Capture", "Security"],
-                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop",
+                image: "/NPS.png",
                 github: "https://github.com/Pmvita/Network-Packet-Sniffer_app",
                 live: "#"
               },
@@ -352,7 +352,7 @@ export default function Home() {
                 title: "Firewall IP Blocker",
                 description: "Python-based Firewall Application with GUI that blocks unauthorized IP addresses and logs malicious activity for security monitoring.",
                 technologies: ["Python", "Firewall", "GUI", "IP Blocking", "Security Logging"],
-                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop",
+                image: "/Firewall-IP-Blocker.png",
                 github: "https://github.com/Pmvita/Firewall-IP-Blocker",
                 live: "#"
               },
@@ -360,7 +360,7 @@ export default function Home() {
                 title: "Intrusion Detection System",
                 description: "Python-based IDS for monitoring network traffic, system logs, and port scanning activities to detect potential security threats with GUI interface.",
                 technologies: ["Python", "IDS", "Network Monitoring", "Security", "GUI"],
-                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop",
+                image: "/IDS.png",
                 github: "https://github.com/Pmvita/Intrusion-Detection-System_App",
                 live: "#"
               }
