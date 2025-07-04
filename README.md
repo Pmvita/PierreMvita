@@ -98,7 +98,6 @@ Feel free to fork this project and customize it for your own portfolio. If you f
 ## 📞 Contact
 
 - Email: Petermvita@hotmail.com
-- Phone: (437) 575-8178
 - GitHub: [github.com/Pmvita](https://github.com/Pmvita)
 - LinkedIn: [linkedin.com/in/pierre-mvita](https://linkedin.com/in/pierre-mvita)
 
