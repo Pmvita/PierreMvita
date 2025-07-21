@@ -45,6 +45,17 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Add Credly embed script once
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.credly.com/assets/utilities/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -222,8 +233,25 @@ export default function Home() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               I work with a variety of technologies to create comprehensive and secure solutions
             </p>
+            {/* Certifications & Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            {/*<h3 className="text-2xl font-bold text-gray-900 mb-6">Certifications & Badges</h3>*/}
+            <div className="flex flex-wrap justify-center gap-4">
+              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="9ec4f3e6-0584-44fb-8d45-08b7895405f1" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="342bdc38-c38f-44af-a387-22433163a834" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="05b16758-b1c9-4e7d-8874-557e46e43fad" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="0238b490-8404-41c8-afa4-a6a508c7d124" data-share-badge-host="https://www.credly.com"></div>
+            </div>
+          </motion.div>
           </motion.div>
 
+          {/* Skills Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
