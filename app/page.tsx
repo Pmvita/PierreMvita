@@ -150,8 +150,8 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-               I&apos;m a Mobile & Full-Stack Developer with 2 years of experience creating software and security tools within the technology sector.
-             </p>
+                I&apos;m a Mobile & Full-Stack Developer with +2 years of experience creating software and security tools within the technology sector.
+              </p>
           </motion.div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -164,8 +164,8 @@ export default function Home() {
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">My Journey</h3>
                 <p className="text-blue-100 mb-6">
-                   With 2 years of experience in Mobile & Full-Stack Development, I&apos;ve worked on diverse projects ranging from secure web applications to mobile apps and cybersecurity tools. I believe in writing clean, maintainable code and staying up-to-date with the latest technologies.
-                 </p>
+                    With +2 years of experience in Mobile & Full-Stack Development, I&apos;ve worked on diverse projects ranging from secure web applications to mobile apps and cybersecurity tools. I believe in writing clean, maintainable code and staying up-to-date with the latest technologies.
+                  </p>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <div className="font-semibold">Experience</div>
