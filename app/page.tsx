@@ -350,7 +350,7 @@ export default function Home() {
                 technologies: ["Python", "Machine Learning", "AI", "Network Security", "Cybersecurity"],
                 image: "/SecureNet.png",
                 github: "https://github.com/Pmvita/SecureNet",
-                live: "#"
+                live: "https://securenet-ai.vercel.app/"
               },
               {
                 title: "OneSocial-supabase",
