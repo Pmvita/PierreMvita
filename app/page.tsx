@@ -19,6 +19,24 @@ import {
   ArrowRight
 } from 'lucide-react'
 
+// TypeScript interfaces
+interface Project {
+  title: string
+  description: string
+  technologies: string[]
+  image: string
+  github: string
+  live: string
+}
+
+interface SkillCategory {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  skills: string[]
+}
+
+
+
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -64,7 +82,7 @@ const useTypewriter = (text: string, speed: number = 100) => {
 }
 
 // Interactive Project Card Component
-const ProjectCard = ({ project, index }: { project: any; index: number }) => {
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [ref, isInView] = useIntersectionObserver({ threshold: 0.1 })
@@ -223,7 +241,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 }
 
 // Interactive Skill Card Component
-const SkillCard = ({ category, index }: { category: any; index: number }) => {
+const SkillCard = ({ category, index }: { category: SkillCategory; index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [ref, isInView] = useIntersectionObserver({ threshold: 0.1 })
 
@@ -637,7 +655,7 @@ export default function Home() {
                 { icon: Github, href: "https://github.com/Pmvita", label: "GitHub" },
                 { icon: Linkedin, href: "https://linkedin.com/in/pierre-mvita", label: "LinkedIn" },
                 { icon: Mail, href: "mailto:pierre.mvita@gmail.com", label: "Email" }
-              ].map((social, index) => (
+              ].map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
@@ -693,7 +711,7 @@ export default function Home() {
               </p>
               <p className="text-gray-600 mb-6">
                 With experience in cloud infrastructure, CI/CD pipelines, and modern development practices, 
-                I create robust solutions that scale. I'm always eager to learn new technologies and contribute 
+                I create robust solutions that scale. I&apos;m always eager to learn new technologies and contribute 
                 to the developer community.
               </p>
               <motion.button
@@ -866,7 +884,7 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              I'm always interested in new opportunities and exciting projects
+              I&apos;m always interested in new opportunities and exciting projects
             </p>
           </motion.div>
 
@@ -877,11 +895,11 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Work Together</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Let&apos;s Work Together</h3>
               <p className="text-gray-600 mb-8">
-                I'm passionate about creating innovative solutions and would love to discuss 
-                how I can help bring your ideas to life. Whether it's a new project, 
-                collaboration opportunity, or just a chat about technology, I'm all ears!
+                I&apos;m passionate about creating innovative solutions and would love to discuss 
+                how I can help bring your ideas to life. Whether it&apos;s a new project, 
+                collaboration opportunity, or just a chat about technology, I&apos;m all ears!
               </p>
               
               <div className="space-y-4">
@@ -917,7 +935,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Stats</h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { label: "Projects Completed", value: "20+" },
+                  { label: "Projects Completed", value: "50+" },
                   { label: "Years Experience", value: "3+" },
                   { label: "Technologies", value: "15+" },
                   { label: "Happy Clients", value: "10+" }
