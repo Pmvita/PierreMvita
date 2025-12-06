@@ -429,24 +429,34 @@ export default function Home() {
   // Memoized skills data
   const skills = useMemo(() => [
     {
-      icon: Server,
-      title: "Backend",
-      skills: ["Flask (Python)", "PostgreSQL", "JWT", "RESTful API", "OpenAPI/Swagger", "pytest"]
+      icon: Code,
+      title: "Languages",
+      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Python", "Dart", "C#", "C++"]
     },
     {
       icon: Globe,
       title: "Frontend",
-      skills: ["Next.js 14", "React", "TypeScript", "Tailwind CSS", "Zustand", "Vercel"]
+      skills: ["React", "Next.js", "Three.js", "Tailwind CSS", "NativeWind", "Material UI", "Framer Motion", "Redux", "Zustand"]
+    },
+    {
+      icon: Server,
+      title: "Backend",
+      skills: ["Node.js", "Express", "Django", "Flask", "Socket.io", "WebSockets", "REST"]
     },
     {
       icon: Mobile,
       title: "Mobile",
-      skills: ["React Native", "Expo", "React Navigation", "Redux Toolkit"]
+      skills: ["React Native", "Flutter", "Expo", "EAS Build"]
+    },
+    {
+      icon: Database,
+      title: "Databases",
+      skills: ["SQLite", "PostgreSQL", "Prisma", "Supabase", "Redis"]
     },
     {
       icon: Cloud,
-      title: "Infrastructure",
-      skills: ["Docker", "GitHub Actions", "Sentry", "PostgreSQL (managed)"]
+      title: "Tools & Testing",
+      skills: ["Docker", "Jest", "Detox", "Playwright", "TensorFlow", "Ethers.js"]
     }
   ], [])
 
@@ -790,7 +800,7 @@ export default function Home() {
           </motion.div>
 
           {/* Tech Stack Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((category, index) => (
               <SkillCard key={category.title} category={category} index={index} />
             ))}
