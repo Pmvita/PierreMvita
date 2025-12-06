@@ -318,7 +318,7 @@ export default function Home() {
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   // Typewriter effect for hero text
-  const { displayText: heroText, isComplete: heroComplete } = useTypewriter("Full-Stack Developer & Cybersecurity Specialist", 100)
+  const { displayText: heroText, isComplete: heroComplete } = useTypewriter("Full-Stack Developer", 100)
   const { displayText: subtitleText } = useTypewriter("Building secure, scalable solutions with modern technologies", 50)
 
   useEffect(() => {
@@ -586,15 +586,30 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
+              className="mb-8 flex justify-center"
             >
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="inline-block p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6"
-              >
-                <Shield className="h-12 w-12 text-white" />
-              </motion.div>
+              <div className="atom-icon" style={{ perspective: '1000px' }}>
+                <div className="atom-container">
+                  {/* Nucleus */}
+                  <div className="nucleus"></div>
+
+                  {/* Electron orbits using CSS transforms for smooth animation */}
+                  <div className="orbit orbit-1">
+                    <div className="orbit-ring"></div>
+                    <div className="electron electron-1"></div>
+                  </div>
+
+                  <div className="orbit orbit-2">
+                    <div className="orbit-ring"></div>
+                    <div className="electron electron-2"></div>
+                  </div>
+
+                  <div className="orbit orbit-3">
+                    <div className="orbit-ring"></div>
+                    <div className="electron electron-3"></div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.h1
@@ -703,7 +718,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Full-Stack Developer & Cybersecurity Specialist</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Full-Stack Developer</h3>
               <p className="text-gray-600 mb-6">
                 I specialize in building comprehensive web and mobile applications with a strong focus on security and performance. 
                 My expertise spans from frontend development with React and Next.js to backend systems using Python and Flask, 
@@ -968,7 +983,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold mb-4">Pierre Mvita</h3>
-            <p className="text-gray-400 mb-6">Full-Stack Developer & Cybersecurity Specialist</p>
+            <p className="text-gray-400 mb-6">Full-Stack Developer</p>
             <div className="flex justify-center space-x-6 mb-8">
               {[
                 { icon: Github, href: "https://github.com/Pmvita" },
