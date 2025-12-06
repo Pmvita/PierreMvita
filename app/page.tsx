@@ -401,19 +401,22 @@ export default function Home() {
       live: "#"
     },
     {
-      title: "Network Packet Sniffer",
-      description: "Python-based tool for capturing and analyzing network traffic in real-time with GUI for monitoring packets and detecting suspicious activity.",
-      technologies: ["Python", "Network Analysis", "GUI", "Packet Capture", "Security"],
-      image: "/NPS.png",
-      github: "https://github.com/Pmvita/Network-Packet-Sniffer_app",
+      title: "Web Scraper",
+      description: "A user-friendly web scraper application with a clean PyQt6 GUI that allows you to scrape websites with minimal configuration. Features include auto-detection of web elements, organized data preview, export to JSON/CSV, and robust error handling.",
+      technologies: ["Python", "PyQt6", "BeautifulSoup4", "Requests", "Pandas", "LXML", "Selenium"],
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwebscraper.io%2Fimg%2Fimghero.png&f=1&nofb=1&ipt=fff7f15ef0797fab3de6102e08be1e2bcfaeba0fb1199bfb88ad37e86eff633c",
+      github: "https://github.com/Pmvita/WebScrapper",
       live: "#"
     },
     {
-      title: "Firewall IP Blocker",
-      description: "Python-based Firewall Application with GUI that blocks unauthorized IP addresses and logs malicious activity for security monitoring.",
-      technologies: ["Python", "Firewall", "GUI", "IP Blocking", "Security Logging"],
-      image: "/Firewall-IP-Blocker.png",
-      github: "https://github.com/Pmvita/Firewall-IP-Blocker",
+      title: "ObjectDetector",
+      description: "A real-time object detection and face recognition application running on web (TensorFlow.js) and Python (YOLO/DeepFace) with webcam support, multi-model detection, bounding boxes, live stats, and responsive UI.",
+      technologies: [
+        "Python", "TypeScript", "TensorFlow.js", "YOLO", "DeepFace", 
+        "OpenCV", "COCO-SSD", "React", "Webcam", "Real-time", "Computer Vision"
+      ],
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdeeplobe.ai%2Fwp-content%2Fuploads%2F2023%2F06%2FObject-detection-Real-world-applications-and-benefits.png&f=1&nofb=1&ipt=4c39e793161eb5bea9046f6a25c7730068387d01e04f0ecafa9449676a73ff62",
+      github: "https://github.com/Pmvita/ObjectDetector",
       live: "#"
     },
     {
@@ -730,14 +733,12 @@ export default function Home() {
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Full-Stack Developer</h3>
               <p className="text-gray-600 mb-6">
-                I specialize in building comprehensive web and mobile applications with a strong focus on security and performance. 
-                My expertise spans from frontend development with React and Next.js to backend systems using Python and Flask, 
-                with particular emphasis on cybersecurity implementations.
+                I specialize in building comprehensive Full-Stack and mobile applications with a strong focus on security and performance. 
+                My expertise spans from frontend & backend development to mobile development and some blockchain development.
               </p>
               <p className="text-gray-600 mb-6">
-                With experience in cloud infrastructure, CI/CD pipelines, and modern development practices, 
-                I create robust solutions that scale. I&apos;m always eager to learn new technologies and contribute 
-                to the developer community.
+              With experience in modern development practices, I create robust solutions that scale.
+              I&apos;m always eager to learn new technologies and contribute to the developer community!
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -755,29 +756,19 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-4"
+              className="flex justify-center items-center"
             >
-              {[
-                { icon: Code, label: "Full-Stack", value: "100%" },
-                { icon: Shield, label: "Security", value: "95%" },
-                { icon: Database, label: "Databases", value: "90%" },
-                { icon: Cloud, label: "Cloud", value: "85%" }
-              ].map((skill, index) => (
-                <motion.div
-                  key={skill.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-2xl text-center"
-                >
-                  <div className="text-blue-600 mb-2">
-                    <skill.icon className="h-8 w-8" />
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900">{skill.value}</div>
-                  <div className="text-gray-600">{skill.label}</div>
-                </motion.div>
-              ))}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D5603AQGe25O9PTJrBQ/profile-displayphoto-shrink_800_800/B56ZevMFWjGoAc-/0/1750990870971?e=1766620800&v=beta&t=XZKd_gxWMGzpiLdGEY-f2d_oukAp5ffHidmS1XJkLWY"
+                  alt="Pierre Mvita"
+                  className="w-80 h-80 rounded-full object-cover shadow-2xl border-4 border-white ring-4 ring-blue-200"
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
