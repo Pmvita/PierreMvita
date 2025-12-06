@@ -758,7 +758,7 @@ export default function Home() {
                   href={social.href}
                   whileHover={{ scale: 1.2, y: -5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 hover:text-blue-600"
+                  className="p-3 gold-chrome-button rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 text-white"
                 >
                   <social.icon className="h-6 w-6" />
                 </motion.a>
