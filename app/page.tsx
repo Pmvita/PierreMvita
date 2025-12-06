@@ -372,12 +372,16 @@ export default function Home() {
   // Memoized projects data
   const projects = useMemo(() => [
     {
-      title: "SecureNet AI",
-      description: "AI-powered cybersecurity platform with real-time threat detection, network monitoring, and automated incident response using machine learning algorithms.",
-      technologies: ["Python", "Machine Learning", "AI", "Network Security", "Cybersecurity"],
-      image: "https://github.com/Pmvita/SecureNet/raw/main/screenshots/dashboard.png",
-      github: "https://github.com/Pmvita/SecureNet",
-      live: "https://securenet-ai.vercel.app/"
+      title: "RuneKey",
+      description: "A modern, secure, and user-friendly multi-chain cryptocurrency wallet. Features include token swaps with DEX aggregation, real-time market data for both crypto and traditional assets, QR code scanning, dark mode, and strong local key security. Built with React Native (Expo), TypeScript, Zustand, and cross-platform architecture for iOS, Android, and web.",
+      technologies: [
+        "React Native", "TypeScript", "Expo", "Zustand",
+        "Multi-chain", "Blockchain", "DEX Aggregation", 
+        "CoinGecko API", "SecureStore", "Cross-platform"
+      ],
+      image: "https://github.com/Pmvita/RuneKey/raw/main/assets/screenshots/splash-screen.png",
+      github: "https://github.com/Pmvita/RuneKey",
+      live: "#"
     },
     {
       title: "SMB-Finance-OS",
@@ -842,18 +846,44 @@ export default function Home() {
           <div className="space-y-8">
             {[
               {
-                title: "Full-Stack Developer",
-                company: "Freelance",
-                period: "2023 - Present",
-                description: "Developing secure web and mobile applications using modern technologies like React, Next.js, Python, and cloud services.",
-                skills: ["React", "Next.js", "Python", "AWS", "Security"]
+                title: "Full Stack Engineer",
+                company: "Self-employed",
+                period: "Jan 2023 - Present · 3 yrs",
+                location: "Toronto, Ontario, Canada · Hybrid",
+                description: [
+                  "Developed and deployed secure full-stack applications using React.js, Node.js, Firebase, and Next.js, integrating JWT and OAuth for authentication.",
+                  "Built and delivered cross-platform mobile applications using React Native and Expo, applying encryption with SecureStore and Web3.js.",
+                  "Collaborated with global clients to analyze requirements and design scalable UIs with TypeScript, Tailwind CSS, and responsive frameworks.",
+                  "Integrated cloud services like AWS S3 and Lambda to ensure secure file storage and serverless operations.",
+                  "Managed codebase with GitHub, implemented CI/CD pipelines via GitHub Actions, and documented features for client handoff."
+                ],
+                skills: [
+                  "Mobile Application Development",
+                  "Back-End Web Development",
+                  "Full Stack Engineering",
+                  "Cloud Services"
+                ]
               },
               {
-                title: "Cybersecurity Specialist",
-                company: "Independent Projects",
-                period: "2022 - Present",
-                description: "Creating security tools and implementing best practices for network monitoring and threat detection.",
-                skills: ["Network Security", "Python", "Penetration Testing", "Security Tools"]
+                title: "IT Consulting",
+                company: "Self-employed",
+                period: "Sep 2024 - Sep 2025 · 1 yr 4 mos",
+                location: "Toronto, Ontario, Canada · On-site",
+                description: [
+                  "Led a complete AWS migration for a nonprofit media organization, transferring terabytes of archival video from on-premises drives to Amazon S3, improved backup redundancy, disaster recovery readiness, and remote access.",
+                  "Architected and secured AWS cloud environments, leveraging VPC design, IAM role policies, multi-factor authentication, and CloudTrail/GuardDuty monitoring to reduce threat exposure.",
+                  "Designed secure data pipelines with AWS Transfer Family and AWS Storage Gateway to streamline uploads from local infrastructure to the cloud.",
+                  "Created cost-optimized storage and compute solutions using Reserved Instances, S3 Intelligent-Tiering, and CloudWatch metrics to monitor usage.",
+                  "Maintained strict NDA compliance for all client engagements to ensure data confidentiality."
+                ],
+                skills: [
+                  "Network Security",
+                  "Cybersecurity Best Practices",
+                  "AWS Architecture",
+                  "Cloud Migration",
+                  "Data Pipelines",
+                  "Cost Optimization"
+                ]
               }
             ].map((job, index) => (
               <motion.div
@@ -951,7 +981,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Stats</h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { label: "Projects Completed", value: "50+" },
+                  { label: "Projects Completed", value: "60+" },
                   { label: "Years Experience", value: "3+" },
                   { label: "Technologies", value: "15+" },
                   { label: "Happy Clients", value: "10+" }
