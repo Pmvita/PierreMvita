@@ -13,10 +13,10 @@ import {
   Cloud,
   Smartphone as Mobile,
   ChevronDown,
-  Shield,
   Code,
   Database,
-  ArrowRight
+  ArrowRight,
+  X
 } from 'lucide-react'
 
 // TypeScript interfaces
@@ -120,7 +120,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+      className="group relative bg-gray-800/60 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-700/50"
     >
       {/* Project Image */}
       <div className="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
@@ -167,7 +167,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       {/* Project Content */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
             {project.title}
           </h3>
           <motion.button
@@ -183,7 +183,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         <motion.p
           initial={{ height: "auto" }}
           animate={{ height: isExpanded ? "auto" : "3rem" }}
-          className="text-gray-600 mb-4 overflow-hidden"
+            className="text-gray-300 mb-4 overflow-hidden"
         >
           {project.description}
         </motion.p>
@@ -220,7 +220,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             href={project.github}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
+            className="flex items-center text-gray-300 hover:text-white transition-colors font-medium"
           >
             <Github className="h-4 w-4 mr-2" />
             Code
@@ -229,11 +229,93 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             href={project.live}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center text-blue-600 hover:text-blue-700 transition-colors font-medium"
+            className="flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium"
           >
             <ExternalLink className="h-4 w-4 mr-2" />
             Live Demo
           </motion.a>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+// Experience Card Component
+interface ExperienceJob {
+  title: string
+  company: string
+  period: string
+  location?: string
+  description: string | string[]
+  skills: string[]
+}
+
+const ExperienceCard = ({ job, index, onClick }: { job: ExperienceJob; index: number; onClick: () => void }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, delay: index * 0.2 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02, y: -5 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={onClick}
+      className="group relative bg-gray-800/60 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-700/50 overflow-hidden cursor-pointer"
+    >
+      {/* Hover Overlay */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-10"
+          >
+            <div className="text-center px-6">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                className="text-white text-lg font-semibold"
+              >
+                Click to view details
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-0">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div>
+            <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">{job.title}</h3>
+            <p className="text-blue-400 font-semibold">{job.company}</p>
+          </div>
+          <span className="text-gray-400 font-medium">{job.period}</span>
+        </div>
+        <div className="mb-4 space-y-2">
+          {Array.isArray(job.description) ? (
+            job.description.map((desc, idx) => (
+              <p key={idx} className="text-gray-300 text-sm leading-relaxed">
+                {desc}
+              </p>
+            ))
+          ) : (
+            <p className="text-gray-300">{job.description}</p>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {job.skills.map((skill) => (
+            <span
+              key={skill}
+              className="bg-blue-500/20 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-full text-sm font-medium"
+            >
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
     </motion.div>
@@ -274,10 +356,19 @@ const SkillCard = ({ category, index }: { category: SkillCategory; index: number
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden"
+      className="group relative bg-gray-800/60 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-700/50 overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Hover Overlay */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"
+          />
+        )}
+      </AnimatePresence>
       
       <div className="relative z-10">
         <motion.div 
@@ -288,7 +379,7 @@ const SkillCard = ({ category, index }: { category: SkillCategory; index: number
           <category.icon className="h-8 w-8" />
         </motion.div>
         
-        <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
           {category.title}
         </h3>
         
@@ -314,6 +405,7 @@ const SkillCard = ({ category, index }: { category: SkillCategory; index: number
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [selectedExperience, setSelectedExperience] = useState<ExperienceJob | null>(null)
   const { scrollYProgress } = useScroll()
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1])
 
@@ -468,7 +560,7 @@ export default function Home() {
   ], [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen chrome-background">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 origin-left z-50"
@@ -476,7 +568,7 @@ export default function Home() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-40 border-b border-gray-200 shadow-sm">
+      <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-40 border-b border-gray-700/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <motion.div
@@ -497,8 +589,8 @@ export default function Home() {
                   onClick={() => scrollToSection(section)}
                   className={`capitalize transition-all duration-200 relative ${
                     activeSection === section
-                      ? 'text-blue-600 font-medium'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? 'text-blue-400 font-medium'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   {section}
@@ -553,8 +645,8 @@ export default function Home() {
                       onClick={() => scrollToSection(section)}
                       className={`block w-full text-left px-4 py-2 capitalize transition-colors ${
                         activeSection === section
-                          ? 'text-blue-600 font-medium bg-blue-50'
-                          : 'text-gray-600 hover:text-gray-900'
+                          ? 'text-blue-400 font-medium bg-blue-900/30'
+                          : 'text-gray-300 hover:text-white'
                       }`}
                     >
                       {section}
@@ -568,34 +660,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 pb-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
-        {/* Background Animation */}
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
-          />
-        </div>
+      <section id="home" className="pt-20 pb-16 relative overflow-hidden chrome-content">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
@@ -633,7 +698,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold text-gray-900 mb-2"
+              className="text-5xl md:text-7xl font-bold text-white mb-2"
             >
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {heroText}
@@ -645,7 +710,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"
+              className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
             >
               {subtitleText}
             </motion.p>
@@ -670,7 +735,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection('contact')}
-                className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
+                className="border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-500 hover:text-white transition-all duration-300"
                 >
                   Get In Touch
                 </motion.button>
@@ -713,7 +778,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 chrome-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -722,8 +787,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Passionate about creating secure, scalable solutions and staying up-to-date with the latest technologies.
               </p>
           </motion.div>
@@ -735,12 +800,12 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Full-Stack Developer</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-2xl font-bold text-white mb-6">Full-Stack Developer</h3>
+              <p className="text-gray-300 mb-6">
                 I specialize in building comprehensive Full-Stack and mobile applications with a strong focus on security and performance. 
                 My expertise spans from frontend & backend development to mobile development and some blockchain development.
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-white mb-6">
               With experience in modern development practices, I create robust solutions that scale.
               I&apos;m always eager to learn new technologies and contribute to the developer community!
               </p>
@@ -770,7 +835,7 @@ export default function Home() {
                 <img
                   src="https://media.licdn.com/dms/image/v2/D5603AQGe25O9PTJrBQ/profile-displayphoto-shrink_800_800/B56ZevMFWjGoAc-/0/1750990870971?e=1766620800&v=beta&t=XZKd_gxWMGzpiLdGEY-f2d_oukAp5ffHidmS1XJkLWY"
                   alt="Pierre Mvita"
-                  className="w-80 h-80 rounded-full object-cover shadow-2xl border-4 border-white ring-4 ring-blue-200"
+                  className="w-80 h-80 rounded-full object-cover shadow-2xl border-4 border-white ring-4 ring-yellow-500"
                 />
               </motion.div>
             </motion.div>
@@ -779,7 +844,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section id="skills" className="py-20 chrome-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -788,8 +853,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Skills & Technologies</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Skills & Technologies</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               I work with a variety of technologies to create comprehensive and secure solutions
             </p>
           </motion.div>
@@ -804,7 +869,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-white">
+      <section id="projects" className="py-20 chrome-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -813,8 +878,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Featured Projects</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Here are some of my recent projects showcasing my skills and expertise
             </p>
           </motion.div>
@@ -828,7 +893,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section id="experience" className="py-20 chrome-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -837,8 +902,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Experience</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Experience</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               My professional journey and achievements
             </p>
           </motion.div>
@@ -886,40 +951,19 @@ export default function Home() {
                 ]
               }
             ].map((job, index) => (
-              <motion.div
-                key={job.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">{job.title}</h3>
-                    <p className="text-blue-600 font-semibold">{job.company}</p>
-                  </div>
-                  <span className="text-gray-500 font-medium">{job.period}</span>
-                </div>
-                <p className="text-gray-600 mb-4">{job.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {job.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+              <ExperienceCard 
+                key={job.title} 
+                job={job} 
+                index={index} 
+                onClick={() => setSelectedExperience(job)}
+              />
             ))}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className="py-20 chrome-content">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -928,8 +972,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               I&apos;m always interested in new opportunities and exciting projects
             </p>
           </motion.div>
@@ -941,8 +985,8 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Let&apos;s Work Together</h3>
-              <p className="text-gray-600 mb-8">
+              <h3 className="text-2xl font-bold text-white mb-6">Let&apos;s Work Together</h3>
+              <p className="text-gray-300 mb-8">
                 I&apos;m passionate about creating innovative solutions and would love to discuss 
                 how I can help bring your ideas to life. Whether it&apos;s a new project, 
                 collaboration opportunity, or just a chat about technology, I&apos;m all ears!
@@ -962,7 +1006,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.02 }}
-                  className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                  className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
                 >
                     <contact.icon className="h-5 w-5 mr-3" />
                     {contact.text}
@@ -976,9 +1020,9 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl"
+              className="bg-black/60 backdrop-blur-sm p-8 rounded-2xl"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Stats</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Quick Stats</h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
                   { label: "Projects Completed", value: "60+" },
@@ -994,8 +1038,8 @@ export default function Home() {
                     viewport={{ once: true }}
                     className="text-center"
                   >
-                    <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
-                    <div className="text-gray-600">{stat.label}</div>
+                    <div className="text-3xl font-bold text-blue-400 mb-2">{stat.value}</div>
+                    <div className="text-gray-300">{stat.label}</div>
                   </motion.div>
                 ))}
                 </div>
@@ -1036,6 +1080,95 @@ export default function Home() {
           </motion.div>
         </div>
       </footer>
+
+      {/* Experience Modal */}
+      <AnimatePresence>
+        {selectedExperience && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedExperience(null)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+            />
+            
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-gray-800/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                {/* Modal Header */}
+                <div className="sticky top-0 bg-gray-800/95 backdrop-blur-xl border-b border-gray-700/50 p-6 flex items-start justify-between">
+                  <div className="flex-1">
+                    <h2 className="text-3xl font-bold text-white mb-2">{selectedExperience.title}</h2>
+                    <p className="text-blue-400 font-semibold text-lg">{selectedExperience.company}</p>
+                    {selectedExperience.location && (
+                      <p className="text-gray-400 text-sm mt-1">{selectedExperience.location}</p>
+                    )}
+                    <p className="text-gray-400 text-sm mt-1">{selectedExperience.period}</p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setSelectedExperience(null)}
+                    className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-gray-700/50"
+                  >
+                    <X className="h-6 w-6" />
+                  </motion.button>
+                </div>
+
+                {/* Modal Content */}
+                <div className="p-6">
+                  <div className="mb-6">
+                    <h3 className="text-xl font-bold text-white mb-4">Responsibilities & Achievements</h3>
+                    <div className="space-y-3">
+                      {Array.isArray(selectedExperience.description) ? (
+                        selectedExperience.description.map((desc, idx) => (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="flex items-start gap-3"
+                          >
+                            <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                            <p className="text-gray-300 leading-relaxed">{desc}</p>
+                          </motion.div>
+                        ))
+                      ) : (
+                        <p className="text-gray-300 leading-relaxed">{selectedExperience.description}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-4">Skills & Technologies</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedExperience.skills.map((skill, idx) => (
+                        <motion.span
+                          key={skill}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="bg-blue-500/20 text-blue-300 border border-blue-500/30 px-4 py-2 rounded-full text-sm font-medium"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
