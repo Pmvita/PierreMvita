@@ -569,6 +569,19 @@ export default function Home() {
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-40 border-b border-gray-700/50 shadow-lg">
+        {/* Gooey filter for nav blobs */}
+        <svg className="hidden">
+          <filter id="gooey-nav">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -8"
+              result="goo"
+            />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </svg>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <motion.div
@@ -580,24 +593,36 @@ export default function Home() {
             </motion.div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
+            <div
+              className="relative hidden md:flex items-center gap-2"
+              style={{ filter: 'url(#gooey-nav)' }}
+            >
+              <span className="pointer-events-none absolute inset-0 rounded-full bg-white/5 blur-2xl opacity-70" />
               {['home', 'about', 'skills', 'projects', 'experience', 'contact'].map((section) => (
                 <motion.button
                   key={section}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.06, y: -1 }}
+                  whileTap={{ scale: 0.96 }}
                   onClick={() => scrollToSection(section)}
-                  className={`capitalize transition-all duration-200 relative ${
+                  className={`relative overflow-hidden rounded-full px-4 py-2 capitalize transition-all duration-200 text-sm font-medium ${
                     activeSection === section
-                      ? 'text-blue-400 font-medium'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'text-blue-100'
+                      : 'text-gray-200 hover:text-white'
                   }`}
                 >
-                  {section}
+                  <span
+                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                      activeSection === section
+                        ? 'bg-gradient-to-r from-blue-500/60 to-purple-500/60 shadow-[0_10px_30px_rgba(80,140,255,0.4)]'
+                        : 'bg-white/5 opacity-60 hover:opacity-80'
+                    }`}
+                  />
+                  <span className="relative z-10">{section}</span>
+                  <span className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-40 transition-opacity" />
                   {activeSection === section && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600"
+                      className="absolute -bottom-0.5 left-2 right-2 h-1 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 shadow-[0_0_15px_rgba(80,140,255,0.7)]"
                     />
                   )}
                 </motion.button>
