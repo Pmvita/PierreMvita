@@ -1,5 +1,5 @@
+// /Users/petermvita/Desktop/Coding Projects/PierreMvita/app/page.tsx
 'use client'
-
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { 
@@ -18,6 +18,7 @@ import {
   ArrowRight,
   X
 } from 'lucide-react'
+
 
 // TypeScript interfaces
 interface Project {
@@ -560,7 +561,7 @@ export default function Home() {
   ], [])
 
   return (
-    <div className="min-h-screen chrome-background">
+    <div className="relative min-h-screen isolate">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 origin-left z-50"
