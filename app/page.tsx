@@ -357,20 +357,19 @@ const SkillCard = ({ category, index }: { category: SkillCategory; index: number
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-gray-800/60 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-700/50 overflow-hidden"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        e.currentTarget.style.setProperty('--mx', `${x}px`)
+        e.currentTarget.style.setProperty('--my', `${y}px`)
+      }}
+      className="group relative rounded-2xl border border-white/10 bg-gray-900/60 backdrop-blur-xl p-6 shadow-lg transition-all duration-500 hover:shadow-2xl overflow-hidden"
+      style={{
+        backgroundImage:
+          'radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.14), transparent 60%), linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))'
+      }}
     >
-      {/* Hover Overlay */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"
-          />
-        )}
-      </AnimatePresence>
-      
       <div className="relative z-10">
         <motion.div 
           className="text-blue-600 mb-4"
@@ -747,7 +746,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex justify-center space-x-6 mt-12"
+              className="flex justify-center gap-5 mt-12"
             >
               {[
                 { icon: Github, href: "https://github.com/Pmvita", label: "GitHub" },
@@ -757,11 +756,13 @@ export default function Home() {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  whileHover={{ scale: 1.2, y: -5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3 gold-chrome-button rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 text-white"
+                  whileHover={{ scale: 1.12, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-[0_15px_55px_rgba(0,0,0,0.45)]"
                 >
-                  <social.icon className="h-6 w-6" />
+                  <span className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent opacity-60" />
+                  <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 blur-[1px]" />
+                  <social.icon className="h-6 w-6 drop-shadow-[0_2px_8px_rgba(255,255,255,0.45)]" />
                 </motion.a>
               ))}
             </motion.div>
