@@ -13,8 +13,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "aws-cspm",
+    slug: "nimbusflow",
     index: "01",
+    title: "NimbusFlow",
+    kicker: "Serverless event-driven pipeline",
+    year: "2026",
+    outcome:
+      "API Gateway into Lambda, onto SQS, through Step Functions, into DynamoDB, out to SNS — the whole stack, IAM, and alarms in one AWS SAM template. Idle cost is zero.",
+    stack: ["AWS SAM", "Lambda", "API Gateway", "Step Functions", "DynamoDB", "SQS", "SNS", "TypeScript"],
+    architecture: ["API Gateway", "Lambda", "SQS", "Step Functions", "DynamoDB", "SNS"],
+    github: "https://github.com/Pmvita/NimbusFlow",
+  },
+  {
+    slug: "aws-cspm",
+    index: "02",
     title: "AWS CSPM",
     kicker: "Cloud security posture as code",
     year: "2025",
@@ -26,7 +38,7 @@ export const projects: Project[] = [
   },
   {
     slug: "aws-secure-s3",
-    index: "02",
+    index: "03",
     title: "aws-secure-s3",
     kicker: "Locked-down S3 from the CLI",
     year: "2025",
@@ -38,7 +50,7 @@ export const projects: Project[] = [
   },
   {
     slug: "packly",
-    index: "03",
+    index: "04",
     title: "Packly",
     kicker: "Full-stack packet inspector",
     year: "2026",
@@ -59,7 +71,7 @@ export const projects: Project[] = [
   },
   {
     slug: "securenet",
-    index: "04",
+    index: "05",
     title: "SecureNet",
     kicker: "AI-powered network defence",
     year: "2025",
@@ -72,7 +84,7 @@ export const projects: Project[] = [
   },
   {
     slug: "swissone",
-    index: "05",
+    index: "06",
     title: "SwissOne",
     kicker: "Full-stack private banking",
     year: "2026",
@@ -93,7 +105,7 @@ export const projects: Project[] = [
   },
   {
     slug: "onelock",
-    index: "06",
+    index: "07",
     title: "OneLock",
     kicker: "Mobile credential vault",
     year: "2025",
