@@ -1,364 +1,176 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-canvas: #070705;
+  --color-elevated: #0e0d0a;
+  --color-ink: #f4f0e6;
+  --color-muted: #9a9486;
+  --color-gold: #d4af5a;
+  --color-gold-bright: #f0d78c;
+  --color-line: rgba(212, 175, 90, 0.18);
+  --font-display: var(--font-instrument);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #070705;
+  --foreground: #f4f0e6;
 }
 
 html {
-  background: transparent;
-}
-
-html {
-  background: #000;
+  background: #070705;
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   position: relative;
   overflow-x: hidden;
 }
 
-.liquid-ether {
-  animation: ether-pulse 20s ease-in-out infinite;
+::selection {
+  background: rgba(212, 175, 90, 0.35);
+  color: #f4f0e6;
 }
 
-@keyframes ether-pulse {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(0, -8px, 0) scale(1.05);
-    opacity: 1;
-  }
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  background: #d4af5a;
+  color: #070705;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.chrome-content {
+.skip-link:focus {
+  top: 1rem;
+}
+
+.scene-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 800px at 15% -10%, rgba(212, 175, 90, 0.14), transparent 55%),
+    radial-gradient(900px 700px at 90% 110%, rgba(212, 175, 90, 0.08), transparent 50%),
+    radial-gradient(circle at 50% 40%, #12110c 0%, #070705 62%);
+}
+
+.scene-fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.site-content {
   position: relative;
   z-index: 1;
 }
 
-/* Atom Animation Styles */
-.atom-icon {
-  width: 320px !important;
-  height: 320px !important;
-  margin: 0 auto;
+.gold-chrome {
   position: relative;
-  animation: float 6s ease-in-out infinite;
-  display: block !important;
-  z-index: 1;
-  visibility: visible !important;
-  opacity: 1 !important;
-  min-height: 320px !important;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0d78c 0%, #d4af5a 42%, #9a7b2f 100%);
+  color: #14110a;
 }
 
-.atom-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: perspective(1000px);
-}
-
-/* Nucleus - pulsing center */
-.nucleus {
+.gold-chrome::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
-  background: #3b82f6;
-  border-radius: 50%;
-  box-shadow: 
-    0 0 25px rgba(59, 130, 246, 0.8),
-    0 0 50px rgba(59, 130, 246, 0.4),
-    inset 0 0 12px rgba(255, 255, 255, 0.3);
-  animation: pulse-nucleus 2s ease-in-out infinite;
-  z-index: 10;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.45) 48%,
+    transparent 72%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
 }
 
-/* Orbit container */
-.orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 192px;
-  height: 64px;
-  margin: -32px 0 0 -96px;
-  transform-style: preserve-3d;
-  transform-origin: center center;
+.gold-chrome:hover::before {
+  transform: translateX(120%);
 }
 
-/* Orbit ring (elliptical path) */
-.orbit-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 3px solid rgba(59, 130, 246, 0.3);
-  border-radius: 50%;
-  border-style: dashed;
-  animation: orbit-rotate 3s linear infinite;
+.arch-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.55rem;
 }
 
-/* Electron */
-.electron {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #3b82f6;
-  border-radius: 50%;
-  box-shadow: 
-    0 0 12px rgba(59, 130, 246, 0.8),
-    0 0 24px rgba(59, 130, 246, 0.4);
-  top: 50%;
-  left: 50%;
-  margin-top: -9px;
-  margin-left: -9px;
-  animation: electron-orbit 3s linear infinite, electron-glow 2s ease-in-out infinite;
-  z-index: 5;
+.arch-node {
+  border: 1px solid var(--color-line);
+  background: rgba(14, 13, 10, 0.7);
+  color: #f0d78c;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.65rem;
 }
 
-/* Orbit 1 - horizontal ellipse */
-.orbit-1 {
-  transform: rotateX(0deg);
+.arch-arrow {
+  color: rgba(212, 175, 90, 0.55);
+  font-size: 0.75rem;
 }
 
-.orbit-1 .electron {
-  animation: electron-orbit-1 3s linear infinite, electron-glow 2s ease-in-out infinite;
-}
-
-/* Orbit 2 - rotated 60 degrees */
-.orbit-2 {
-  transform: rotateX(60deg) rotateY(0deg);
-}
-
-.orbit-2 .electron {
-  animation: electron-orbit-2 4s linear infinite, electron-glow 2s ease-in-out infinite 0.67s;
-}
-
-.orbit-2 .orbit-ring {
-  animation: orbit-rotate 4s linear infinite;
-}
-
-/* Orbit 3 - rotated 120 degrees */
-.orbit-3 {
-  transform: rotateX(120deg) rotateY(0deg);
-}
-
-.orbit-3 .electron {
-  animation: electron-orbit-3 5s linear infinite, electron-glow 2s ease-in-out infinite 1.33s;
-}
-
-.orbit-3 .orbit-ring {
-  animation: orbit-rotate 5s linear infinite reverse;
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-10px) rotate(2deg);
-  }
-  66% {
-    transform: translateY(5px) rotate(-2deg);
-  }
-}
-
-@keyframes pulse-nucleus {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-    box-shadow: 
-      0 0 20px rgba(59, 130, 246, 0.8),
-      0 0 40px rgba(59, 130, 246, 0.4),
-      inset 0 0 10px rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.15);
-    box-shadow: 
-      0 0 30px rgba(59, 130, 246, 1),
-      0 0 60px rgba(59, 130, 246, 0.6),
-      inset 0 0 15px rgba(255, 255, 255, 0.4);
-  }
-}
-
-@keyframes electron-glow {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 
-      0 0 10px rgba(59, 130, 246, 0.8),
-      0 0 20px rgba(59, 130, 246, 0.4);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 
-      0 0 15px rgba(59, 130, 246, 1),
-      0 0 30px rgba(59, 130, 246, 0.6);
-  }
-}
-
-@keyframes orbit-rotate {
+@keyframes rise {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(18px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Electron orbital motion - elliptical paths */
-@keyframes electron-orbit-1 {
-  0% {
-    transform: translateX(96px) translateY(0px);
-  }
-  25% {
-    transform: translateX(0px) translateY(32px);
-  }
-  50% {
-    transform: translateX(-96px) translateY(0px);
-  }
-  75% {
-    transform: translateX(0px) translateY(-32px);
-  }
-  100% {
-    transform: translateX(96px) translateY(0px);
-  }
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes electron-orbit-2 {
-  0% {
-    transform: translateX(96px) translateY(0px) rotateZ(60deg);
-  }
-  25% {
-    transform: translateX(0px) translateY(32px) rotateZ(60deg);
-  }
-  50% {
-    transform: translateX(-96px) translateY(0px) rotateZ(60deg);
-  }
-  75% {
-    transform: translateX(0px) translateY(-32px) rotateZ(60deg);
-  }
-  100% {
-    transform: translateX(96px) translateY(0px) rotateZ(60deg);
-  }
+.rise-delay-1 {
+  animation-delay: 0.12s;
 }
 
-@keyframes electron-orbit-3 {
-  0% {
-    transform: translateX(96px) translateY(0px) rotateZ(120deg);
-  }
-  25% {
-    transform: translateX(0px) translateY(32px) rotateZ(120deg);
-  }
-  50% {
-    transform: translateX(-96px) translateY(0px) rotateZ(120deg);
-  }
-  75% {
-    transform: translateX(0px) translateY(-32px) rotateZ(120deg);
-  }
-  100% {
-    transform: translateX(96px) translateY(0px) rotateZ(120deg);
-  }
+.rise-delay-2 {
+  animation-delay: 0.24s;
 }
 
-/* Gold Chrome Twinkle Effect */
-.gold-chrome-button {
-  position: relative;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 25%, #d97706 50%, #f59e0b 75%, #fbbf24 100%);
-  background-size: 200% 200%;
-  overflow: hidden;
+.rise-delay-3 {
+  animation-delay: 0.36s;
 }
 
-.gold-chrome-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4) 30%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.4) 70%,
-    transparent
-  );
-  transition: left 0.5s ease;
-  z-index: 1;
+.rise-delay-4 {
+  animation-delay: 0.48s;
 }
 
-.gold-chrome-button:hover::before {
-  left: 100%;
-  animation: gold-twinkle 0.6s ease-in-out;
-}
-
-.gold-chrome-button::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.gold-chrome-button:hover::after {
-  opacity: 1;
-  animation: gold-sparkle 1s ease-in-out infinite;
-}
-
-@keyframes gold-twinkle {
-  0% {
-    left: -100%;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  100% {
-    left: 100%;
-  }
-}
 
-@keyframes gold-sparkle {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.3;
+  .rise,
+  .rise-delay-1,
+  .rise-delay-2,
+  .rise-delay-3,
+  .rise-delay-4 {
+    animation: none;
   }
-  50% {
-    transform: rotate(180deg) scale(1.2);
-    opacity: 0.6;
-  }
-}
 
-.gold-chrome-button > * {
-  position: relative;
-  z-index: 2;
+  .gold-chrome::before {
+    display: none;
+  }
 }
