@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "resume": "node scripts/generate-resume.mjs"
+    "resume": "node scripts/generate-resume.mjs",
+    "resume:security": "node scripts/generate-security-resume.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.0",

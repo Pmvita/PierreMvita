@@ -70,8 +70,21 @@ export const projects: Project[] = [
     github: "https://github.com/Pmvita/Packly",
   },
   {
-    slug: "securenet",
+    slug: "logwatch",
     index: "05",
+    title: "Logwatch",
+    kicker: "Local log triage",
+    year: "2026",
+    outcome:
+      "Sample CloudTrail and Windows Security events in. Three detections fire — console login without MFA, a security group opened to the world, a failed-logon burst — and the hits become a markdown incident note with a timeline and IOCs.",
+    stack: ["TypeScript", "Node.js", "CloudTrail", "Windows Event Logs", "Vitest"],
+    architecture: ["Sample JSON", "Normalize", "Detections", "Incident note"],
+    github: "https://github.com/Pmvita/LogWatch",
+    live: "https://www.pierre-mvita.dev",
+  },
+  {
+    slug: "securenet",
+    index: "06",
     title: "SecureNet",
     kicker: "AI-powered network defence",
     year: "2025",
@@ -84,7 +97,7 @@ export const projects: Project[] = [
   },
   {
     slug: "swissone",
-    index: "06",
+    index: "07",
     title: "SwissOne",
     kicker: "Full-stack private banking",
     year: "2026",
@@ -105,7 +118,7 @@ export const projects: Project[] = [
   },
   {
     slug: "onelock",
-    index: "07",
+    index: "08",
     title: "OneLock",
     kicker: "Mobile credential vault",
     year: "2025",
