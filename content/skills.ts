@@ -3,6 +3,7 @@ export type CapabilityLane = {
   title: string
   lead: string
   items: string[]
+  sample: string
 }
 
 export const capabilities: CapabilityLane[] = [
@@ -10,6 +11,7 @@ export const capabilities: CapabilityLane[] = [
     id: "cloud",
     title: "Cloud & IaC",
     lead: "Infrastructure in templates. Failure paths in the design. A known bill before it ships.",
+    sample: "sam deploy --guided --capabilities CAPABILITY_NAMED_IAM",
     items: [
       "Lambda, API Gateway, Step Functions, SQS, SNS",
       "ECS Fargate, ECR, ALB, EC2",
@@ -24,6 +26,7 @@ export const capabilities: CapabilityLane[] = [
     id: "fullstack",
     title: "Full-stack",
     lead: "The code running on that infrastructure is familiar territory.",
+    sample: "docker compose up -d",
     items: [
       "TypeScript, JavaScript, Node.js, Python",
       "Next.js, React, REST APIs",
@@ -36,7 +39,8 @@ export const capabilities: CapabilityLane[] = [
   {
     id: "mobile",
     title: "Mobile",
-    lead: "Cross-platform product when the work needs a client in someone’s hand.",
+    lead: "Cross-platform product when the work needs a client in someone's hand.",
+    sample: "npx expo start",
     items: [
       "React Native, Expo, EAS Build",
       "TypeScript, Zustand",

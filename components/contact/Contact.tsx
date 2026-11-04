@@ -1,17 +1,17 @@
-import { ArrowUpRight, Download } from "lucide-react"
-import { site } from "@/content/site"
+import { ArrowUpRight, Download } from "lucide-react";
+import { site } from "@/content/site";
 
 export function Contact() {
   const links = [
     { label: site.contact.email, href: `mailto:${site.contact.email}` },
     { label: "linkedin.com/in/pierre-mvita", href: site.contact.linkedin },
     { label: "github.com/Pmvita", href: site.contact.github },
-  ]
+  ];
 
   return (
     <section id="contact" className="scroll-mt-24 px-5 py-20 md:px-8">
       <div className="mx-auto max-w-6xl border-t border-line pt-20">
-        <p className="font-mono text-[11px] tracking-[0.32em] text-gold uppercase">
+        <p className="font-mono text-[11px] tracking-[0.32em] text-accent uppercase">
           Contact
         </p>
         <h2 className="mt-4 max-w-3xl font-display text-4xl text-ink sm:text-6xl">
@@ -24,7 +24,7 @@ export function Contact() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="inline-flex items-center gap-2 font-mono text-sm text-ink hover:text-gold"
+                  className="inline-flex items-center gap-2 font-mono text-sm text-ink hover:text-accent"
                 >
                   {link.label}
                   <ArrowUpRight className="size-3.5" />
@@ -37,7 +37,7 @@ export function Contact() {
             <a
               href={site.resumeHref}
               download
-              className="gold-chrome inline-flex items-center gap-2 px-6 py-3 font-mono text-[11px] tracking-[0.2em] uppercase"
+              className="inline-flex items-center gap-2 self-start rounded-md px-6 py-3 font-mono text-[11px] tracking-[0.2em] uppercase"
             >
               <Download className="size-4" />
               {site.resumeLabel}
@@ -57,5 +57,5 @@ export function Contact() {
         </footer>
       </div>
     </section>
-  )
+  );
 }

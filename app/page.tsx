@@ -1,4 +1,4 @@
-import { CapabilityLanes } from "@/components/skills/CapabilityLanes"
+import { Capabilities } from "@/components/skills/Capabilities"
 import { Contact } from "@/components/contact/Contact"
 import { Timeline } from "@/components/experience/Timeline"
 import { Hero } from "@/components/hero/Hero"
@@ -9,14 +9,13 @@ import { WorkList } from "@/components/work/WorkList"
 export default function Home() {
   return (
     <>
-      <div className="scene-fallback" aria-hidden />
       <Scene />
       <div className="site-content">
         <SiteNav />
         <main>
           <Hero />
           <WorkList />
-          <CapabilityLanes />
+          <Capabilities />
           <Timeline />
           <Contact />
         </main>

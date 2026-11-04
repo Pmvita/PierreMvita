@@ -1,37 +1,36 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useState } from "react"
-import { site } from "@/content/site"
-import { cn } from "@/lib/cn"
+import { useCallback, useEffect, useState } from "react";
+import { site } from "@/content/site";
 
 export function SiteNav() {
-  const [active, setActive] = useState("home")
-  const [open, setOpen] = useState(false)
+  const [active, setActive] = useState("home");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const ids = site.nav.map((item) => item.id)
+    const ids = site.nav.map((item) => item.id);
     const onScroll = () => {
-      const position = window.scrollY + 120
+      const position = window.scrollY + 120;
       for (const id of ids) {
-        const el = document.getElementById(id)
-        if (!el) continue
-        const top = el.offsetTop
-        const bottom = top + el.offsetHeight
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
         if (position >= top && position < bottom) {
-          setActive(id)
-          break
+          setActive(id);
+          break;
         }
       }
-    }
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const go = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-    setOpen(false)
-  }, [])
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-canvas/55 backdrop-blur-xl">
@@ -42,7 +41,7 @@ export function SiteNav() {
         <button
           type="button"
           onClick={() => go("home")}
-          className="font-mono text-[11px] tracking-[0.28em] text-gold uppercase"
+          className="font-mono text-[11px] tracking-[0.28em] text-accent uppercase"
         >
           {site.monogram}
         </button>
@@ -54,12 +53,9 @@ export function SiteNav() {
                 type="button"
                 onClick={() => go(item.id)}
                 aria-current={active === item.id ? "true" : undefined}
-                className={cn(
-                  "px-3 py-1.5 font-mono text-[11px] tracking-[0.18em] uppercase transition-colors",
-                  active === item.id
-                    ? "text-gold"
-                    : "text-muted hover:text-ink",
-                )}
+                className={`px-3 py-1.5 font-mono text-[11px] tracking-[0.18em] uppercase transition-colors ${
+                  active === item.id ? "text-accent" : "text-muted hover:text-ink"
+                }`}
               >
                 {item.label}
               </button>
@@ -70,7 +66,7 @@ export function SiteNav() {
         <a
           href={site.resumeHref}
           download
-          className="hidden font-mono text-[11px] tracking-[0.18em] text-gold uppercase md:inline"
+          className="hidden font-mono text-[11px] tracking-[0.18em] text-accent uppercase md:inline"
         >
           Resume
         </a>
@@ -83,22 +79,19 @@ export function SiteNav() {
           onClick={() => setOpen((value) => !value)}
         >
           <span
-            className={cn(
-              "block h-px w-5 bg-ink transition-transform",
-              open && "translate-y-1 rotate-45",
-            )}
+            className={`block h-px w-5 bg-ink transition-transform ${
+              open && "translate-y-1 rotate-45"
+            }`}
           />
           <span
-            className={cn(
-              "block h-px w-5 bg-ink transition-opacity",
-              open && "opacity-0",
-            )}
+            className={`block h-px w-5 bg-ink transition-opacity ${
+              open && "opacity-0"
+            }`}
           />
           <span
-            className={cn(
-              "block h-px w-5 bg-ink transition-transform",
-              open && "-translate-y-1 -rotate-45",
-            )}
+            className={`block h-px w-5 bg-ink transition-transform ${
+              open && "-translate-y-1 -rotate-45"
+            }`}
           />
         </button>
       </nav>
@@ -121,7 +114,7 @@ export function SiteNav() {
               <a
                 href={site.resumeHref}
                 download
-                className="block py-2 font-mono text-xs tracking-[0.2em] text-gold uppercase"
+                className="block py-2 font-mono text-xs tracking-[0.2em] text-accent uppercase"
               >
                 Resume
               </a>
@@ -130,5 +123,5 @@ export function SiteNav() {
         </div>
       ) : null}
     </header>
-  )
+  );
 }

@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "resume": "node scripts/generate-resume.mjs",
-    "resume:security": "node scripts/generate-security-resume.mjs"
+    "resume:security": "node scripts/generate-security-resume.mjs",
+    "resume:soc-l2": "node scripts/generate-soc-l2-resume.mjs",
+    "resume:infosec-ops": "node scripts/generate-infosec-ops-resume.mjs",
+    "resume:it-solutions": "node scripts/generate-it-solutions-resume.mjs",
+    "resume:swe": "node scripts/generate-swe-resume.mjs",
+    "resume:assoc-devops": "node scripts/generate-assoc-devops-resume.mjs",
+    "resume:devops": "node scripts/generate-devops-resume.mjs",
+    "resume:devops-cloud": "node scripts/generate-devops-cloud-resume.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.0",
