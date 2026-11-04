@@ -27,7 +27,7 @@
     "three": "^0.167.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.7",
+    "@eslint/eslintrc": "^0.1.0",
     "@tailwindcss/postcss": "^4.3.4",
     "@types/node": "^20.19.43",
     "@types/react": "^19.3.0",
