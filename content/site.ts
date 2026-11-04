@@ -16,7 +16,7 @@ export const site = {
     { id: "contact", label: "Contact" },
   ],
   contact: {
-    email: "PierreMvita@yahoo.ca",
+    email: "pierrermvita@yahoo.com",
     github: "https://github.com/Pmvita",
     linkedin: "https://www.linkedin.com/in/pierre-mvita",
   },
