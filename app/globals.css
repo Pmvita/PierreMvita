@@ -1,56 +1,62 @@
 @import "tailwindcss";
 
-/* Pierre Mvita — brand suite. One ground, one ink, one accent. Square
- * corners. No gradients on the UI, no glass, no shadows at rest,
- * no eyebrows, no monospace except real code, no index numbers,
- * no hairline rules. Sections separated by a paper stripe. */
+/* Pierre Mvita — brushed steel / blueprint brand suite (v3).
+ * Deep steel ground, one antique-brass accent, characterful display serif,
+ * wide technical mono, warm humanist body. Square-cornered, hairline rules
+ * with a subtle inner shadow at rest, no gradients, no glass, no drop
+ * shadows at rest. */
 @theme inline {
   /* ground */
-  --color-canvas: #070705;
-  --color-canvas-2: #070705;
+  --color-canvas: #0c0c10;
+  --color-canvas-2: #100f14;
 
-  /* elevated = the brand's paper surface */
-  --color-elevated: #0e0d0a;
+  /* elevated = raised steel panel */
+  --color-elevated: #16141a;
 
-  /* ink */
-  --color-ink: #f4f0e6;
-  --color-paragraph: #6e6a5f;
-  --color-muted: #8a8578;
+  /* ink — warm off-white text */
+  --color-ink: #e8e2d4;
+  --color-paragraph: #8a867c;
+  --color-muted: #9aa6b2;
 
-  /* accent = real ink, single accent */
-  --color-accent: #d4af5a;
-  --color-accent-bright: #f0d78c;
+  /* accent — single antique brass, high-contrast only */
+  --color-accent: #c9a227;
+  --color-accent-bright: #e8c96a;
 
-  /* lines: replaced by paper stitch (two-rule) */
-  --color-line: #1b1915;
-  --color-line-strong: #2a261f;
+  /* hairline rules */
+  --color-line: #23201b;
+  --color-line-strong: #332e24;
+
+  /* brushed-steel / blueprint tokens */
+  --color-metal: #b8a88a;
+  --color-metal-bright: #d4b88a;
+  --color-steel: #6b7280;
+  --color-steel-light: #9aa6b2;
+  --color-grid-base: #0e0d11;
+  --color-grid-sub: rgba(232, 226, 212, 0.08);
 
   /* fonts */
-  --font-display: var(--font-instrument);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bodoni-moda);
+  --font-mono: var(--font-space-mono);
+  --font-body: var(--font-satoshi);
 
-  /* type scale (one very large, one supporting, body, caption, label) */
-  --text-display: 9.5rem;
-  --text-display-sm: 7.5rem;
-  --text-supporting: 36px;
+  /* type scale */
+  --text-display: clamp(2.6rem, 6vw, 5rem);
+  --text-supporting: clamp(1.75rem, 3vw, 2.75rem);
   --text-body: 16px;
   --text-caption: 13px;
-  --text-label: 12px;
+  --text-label: 11px;
 
-  /* spacing: equal margins, large section gaps */
-  --space-m: 1.5rem;     /* 24px */
-  --space-l: 2.5rem;     /* 40px */
-  --space-xl: 4rem;      /* 64px */
-  --space-section: 180px; /* section gap */
-
-  /* infinite canvas color-scheme */
-  --color-canvas: #070705;
+  /* spacing */
+  --space-m: 1.25rem;
+  --space-l: 2.25rem;
+  --space-xl: 3.5rem;
+  --space-section: 180px;
 }
 
 :root {
   color-scheme: dark;
-  --background: #070705;
-  --foreground: #f4f0e6;
+  --background: var(--color-canvas);
+  --foreground: var(--color-ink);
 }
 
 /* ---- reset & foundation ---- */
@@ -61,24 +67,24 @@
 }
 
 html {
-  background: #070705;
+  background: #0c0c10;
   scroll-behavior: smooth;
   color-scheme: dark;
 }
 
 body {
   background: transparent;
-  color: var(--foreground);
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: var(--text-body);
-  line-height: 1.5;
+  line-height: 1.6;
   position: relative;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(212, 175, 90, 0.35);
-  color: #f4f0e6;
+  background: rgba(201, 162, 39, 0.32);
+  color: var(--color-ink);
 }
 
 /* ---- skip link ---- */
@@ -88,38 +94,53 @@ body {
   top: -4rem;
   z-index: 80;
   background: var(--color-accent);
-  color: #070705;
+  color: #0c0c10;
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: var(--font-mono);
 }
 
 .skip-link:focus {
   top: var(--space-m);
 }
 
-/* ---- paper stripe (section separator, not a hairline) ---- */
+/* ---- brushed-steel monogram mark ---- */
+.mark-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---- steel hairline separator (replaces the paper stripe) ---- */
 .paper-stripe {
   height: 1px;
   background:
-    linear-gradient(
-      90deg,
-      var(--color-line) 0,
-      var(--color-line-strong) 1.5px,
-      var(--color-line) 3px
-    ),
-    linear-gradient(180deg, transparent 0, rgba(212, 175, 90, 0.12) 100%);
+    linear-gradient(90deg, var(--color-line) 0, var(--color-line-strong) 1.5px, var(--color-line) 3px),
+    linear-gradient(180deg, transparent 0, rgba(212, 160, 74, 0.10) 100%);
   margin: 0;
 }
 
-/* ---- tokens used by components ---- */
+/* ---- token utilities ---- */
 .font-display {
   font-family: var(--font-display);
 }
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.font-body {
+  font-family: var(--font-body);
 }
 
 .ink {
@@ -138,138 +159,66 @@ body {
   color: var(--color-accent);
 }
 
-.gold {
-  color: var(--color-gold);
+.accent-bright {
+  color: var(--color-accent-bright);
 }
 
-.accent-bg {
-  background: var(--color-accent);
-}
-
-/* ---- primary action (flat, square-cornered, single amber accent) ---- */
-.gold-chrome {
+/* ---- primary action (flat, square-cornered, brushed brass) ---- */
+.brass-chrome {
   position: relative;
   overflow: hidden;
   background: var(--color-accent);
-  color: #070705;
+  color: #0c0c10;
   border: 1px solid var(--color-accent);
   border-radius: 0;
 }
 
-.gold-chrome:hover {
+.brass-chrome:hover {
   background: var(--color-accent-bright);
-  color: #070705;
+  color: #0c0c10;
+}
+
+/* ---- inner-shadow steel surface (depth at rest, no glass) ---- */
+.steel-surface {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-line);
+  border-radius: 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45) inset;
 }
 
 /* ---- motion (transform + opacity only) ---- */
 @keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-ring {
-  from {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1.06);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .rise {
-  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.rise-delay-1 {
-  animation-delay: 0.12s;
-}
-.rise-delay-2 {
-  animation-delay: 0.24s;
-}
-.rise-delay-3 {
-  animation-delay: 0.36s;
-}
-.rise-delay-4 {
-  animation-delay: 0.48s;
-}
-.rise-delay-5 {
-  animation-delay: 0.6s;
-}
+.rise-delay-1 { animation-delay: 0.1s; }
+.rise-delay-2 { animation-delay: 0.2s; }
+.rise-delay-3 { animation-delay: 0.3s; }
+.rise-delay-4 { animation-delay: 0.4s; }
+.rise-delay-5 { animation-delay: 0.5s; }
 
-/* ---- focus visibility (accessibility) ---- */
+/* ---- focus ---- */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
-/* ---- doc paper component (the work cards) ---- */
-.doc-paper {
-  position: relative;
-  overflow: hidden;
-  background: var(--color-elevated);
-  border: 1px solid var(--color-line);
-  border-radius: 0; /* square driver */
-  padding: 1.25rem 1.5rem;
-}
-
-.doc-paper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--color-line);
-  border-radius: 0;
-}
-
-/* mark numbers */
-.mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.6rem;
-  height: 1.6rem;
-  padding: 0 0.4rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  background: rgba(212, 175, 90, 0.12);
-  color: var(--color-accent);
-  border-radius: 0;
-}
-
-/* badges: only on action; no pill badges on content */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-/* ---- reduced motion fallback ---- */
+/* ---- reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   .rise,
   .rise-delay-1,
   .rise-delay-2,
@@ -278,6 +227,7 @@ body {
   .rise-delay-5 {
     animation: none;
   }
+
   .paper-stripe {
     background: var(--color-line);
   }

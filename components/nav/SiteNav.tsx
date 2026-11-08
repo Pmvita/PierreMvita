@@ -33,7 +33,7 @@ export function SiteNav() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-canvas/55 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-canvas/60 backdrop-blur-xl">
       <nav
         className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8"
         aria-label="Primary"

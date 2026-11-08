@@ -1,72 +1,80 @@
-import type { Metadata } from "next"
-import { Geist_Mono, Instrument_Serif } from "next/font/google"
-import "./globals.css"
+import type { Metadata } from "next";
+import {
+  Bodoni_Moda,
+  DM_Sans,
+  Space_Mono,
+} from "next/font/google";
+import "./globals.css";
 
-const display = Instrument_Serif({
+const display = Bodoni_Moda({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-instrument",
+  variable: "--font-display",
   display: "swap",
-})
+});
 
-const mono = Geist_Mono({
+const mono = Space_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  weight: ["400", "700"],
+  variable: "--font-mono",
   display: "swap",
-})
+});
+
+const body = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "Pierre Mvita — Cloud Engineer",
+    default: "Pierre Mvita",
     template: "%s — Pierre Mvita",
   },
   description:
-    "Pierre Mvita is a Cloud Engineer in Toronto who ships full-stack and mobile. AWS serverless pipelines, infrastructure as code, and TypeScript products.",
+    "Pierre Mvita — a Cloud Engineer in Toronto. Writes full-stack products with TypeScript and ships cloud infrastructure as code (AWS serverless, Terraform).",
   keywords: [
+    "Pierre Mvita",
     "Cloud Engineer",
     "AWS",
     "Terraform",
-    "AWS SAM",
     "TypeScript",
     "Next.js",
     "React Native",
-    "Pierre Mvita",
+    "Security",
     "Toronto",
   ],
   authors: [{ name: "Pierre Mvita" }],
   metadataBase: new URL("https://pierre-mvita.vercel.app"),
   openGraph: {
-    title: "Pierre Mvita — Cloud Engineer",
+    title: "Pierre Mvita",
     description:
-      "Cloud Engineer who ships full-stack and mobile. Serverless pipelines, IaC, and TypeScript products.",
+      "A Cloud Engineer in Toronto. TypeScript products + AWS serverless infrastructure.",
     type: "website",
     locale: "en_CA",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pierre Mvita — Cloud Engineer",
+    title: "Pierre Mvita",
     description:
-      "Cloud Engineer who ships full-stack and mobile. Serverless pipelines, IaC, and TypeScript products.",
+      "A Cloud Engineer in Toronto. TypeScript products + AWS serverless infrastructure.",
   },
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${mono.variable} scroll-smooth`}
+      className={`${display.variable} ${mono.variable} ${body.variable} scroll-smooth`}
     >
-      <body className="bg-canvas text-ink antialiased">
+      <body className="bg-canvas text-ink antialiased selection:bg-accent/30 selection:text-ink">
         <a href="#work" className="skip-link">
           Skip to work
         </a>
         {children}
       </body>
     </html>
-  )
+  );
 }
