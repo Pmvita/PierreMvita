@@ -3,7 +3,7 @@ import { ProjectCard } from "./ProjectCard";
 
 export function WorkList() {
   return (
-    <section id="work" className="scroll-mt-24 px-5 py-20 md:px-8">
+    <section id="work" className="scroll-mt-24 px-5 py-14 md:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>

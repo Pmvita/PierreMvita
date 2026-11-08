@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-svh flex-col items-start px-5 pt-24 pb-20 md:px-8"
+      className="relative flex min-h-svh flex-col items-start px-5 pt-24 pb-14 md:px-8"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
         <div className="flex flex-col gap-3" style={{ opacity: opacity }}>
