@@ -11,8 +11,6 @@ import { useScrubContext } from "@/components/layout/ScrubProvider";
  *  2. Isometric wireframe box    — brass wireframe ISO cube, auto-rotating
  *  3. Floating brass particles   — small lit point field, slow drift
  *  4. Atmosphere mesh            — faint transparent sphere, backface
- *  5. Brass torus knot           — 3D "core" element, visible in the hero→work
- *                                   gap; brass, low-opacity, tumbles gently
  *
  * Interaction:
  *  - cursor x/y → wireframe tilt + grid skew
@@ -137,19 +135,6 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
     const atmosphere = new THREE.Mesh(sphereGeo, sphereMat);
     scene.add(atmosphere);
 
-    // ── Layer 5: brass torus knot ────────────────────────────────────────
-    const knotGeo = new THREE.TorusKnotGeometry(2.8, 0.55, 128, 16, 2, 3);
-    const knotMat = new THREE.MeshStandardMaterial({
-      color: 0xc9a227,
-      transparent: true,
-      opacity: 0.28,
-      roughness: 0.15,
-      metalness: 0.92,
-      side: THREE.DoubleSide,
-    });
-    const knot = new THREE.Mesh(knotGeo, knotMat);
-    knot.position.set(0, 0.6, 0);
-    scene.add(knot);
 
     // ── Interaction ──────────────────────────────────────────────────────
     const target = { x: 0, y: 0, scroll: 0 };
@@ -198,16 +183,6 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
         0.04
       );
 
-      // Torus knot: slow tumble + orbit
-      knot.rotation.x += 0.004 + ss * 0.002;
-      knot.rotation.y += 0.006 + ss * 0.003;
-      knot.position.z = ss * 0.4 - 0.2;
-      knot.position.y = THREE.MathUtils.lerp(
-        knot.position.y,
-        target.y * 0.08 + ss * 0.05,
-        0.04
-      );
-
       // Camera: scroll lift + scrub depth
       const lift = ss * 1.8;
       camera.position.y = THREE.MathUtils.lerp(
@@ -236,7 +211,6 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
         0.04 + ss * 0.08,
         0.04
       );
-      knotMat.opacity = opacity(knotMat.opacity, 0.28 + ss * 0.12, 0.04);
 
       const fog = scene.fog;
       if (fog) {
@@ -261,8 +235,6 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
       pMat.dispose();
       sphereGeo.dispose();
       sphereMat.dispose();
-      knot.geometry.dispose();
-      knotMat.dispose();
       renderer.dispose();
     };
   }, []);
