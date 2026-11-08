@@ -3,7 +3,7 @@ import type { Project } from "@/content/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="doc-paper">
+    <article className="doc-paper" style={{ maxWidth: "460px" }}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="font-mono text-[11px] tracking-[0.22em] text-muted uppercase">
