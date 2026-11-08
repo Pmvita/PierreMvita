@@ -3,8 +3,26 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export function WebGLBackdrop() {
+/**
+ * Ambient 3D backdrop for the brand. Driven by two things:
+ *
+ *  - `scrub` (0..1) → the hero's in-place scroll-scrub. Lifts the camera and
+ *                     lightens the field so the hero appears to "go through" a
+ *                     3D, frosted layer as you scrub forward.
+ *  - cursor + scroll → pointer x/y and document scroll, lerped into point
+ *                     rotation and camera x/y so the scene tracks the mouse and
+ *                     follows the page (3D scroll).
+ */
+export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const targetScrubRef = useRef(0);
+
+  // Debounce the scrub input so fast scrolling doesn't make the 3D scene fight
+  // the 60fps renderer.
+  useEffect(() => {
+    if (scrub === targetScrubRef.current) return;
+    targetScrubRef.current = scrub;
+  }, [scrub]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -95,10 +113,17 @@ export function WebGLBackdrop() {
     let frame = 0;
     const tick = () => {
       frame = window.requestAnimationFrame(tick);
+
+      // Lerp scrub toward the (possibly debounced) target so the 3D lift is
+      // smooth under fast scroll rather than stuttery.
+      targetScrubRef.current +=
+        (targetScrubRef.current - scrub) * 0.12;
+      const ss = targetScrubRef.current;
+
       points.rotation.y += 0.00045;
       points.rotation.x = THREE.MathUtils.lerp(
         points.rotation.x,
-        target.y * 0.15 + target.scroll * 0.35,
+        target.y * 0.15 + target.scroll * 0.35 + ss * 0.25,
         0.04,
       );
       points.rotation.z = THREE.MathUtils.lerp(
@@ -106,13 +131,35 @@ export function WebGLBackdrop() {
         target.x * 0.08,
         0.04,
       );
-      camera.position.x = THREE.MathUtils.lerp(camera.position.x, target.x * 1.2, 0.03);
+
+      // 3D scroll + see-through: as the hero scrubs forward, the camera lifts
+      // and the point field lightens (less fog, brighter) to imply depth.
+      const lift = ss * 1.6;
       camera.position.y = THREE.MathUtils.lerp(
         camera.position.y,
-        -target.scroll * 1.6,
+        -target.scroll * 1.6 - lift,
         0.04,
       );
+      camera.position.x = THREE.MathUtils.lerp(
+        camera.position.x,
+        target.x * 1.2,
+        0.03,
+      );
       camera.lookAt(0, 0, 0);
+
+      const opacity = 0.72 + ss * 0.28;
+      material.opacity = THREE.MathUtils.lerp(material.opacity, opacity, 0.04);
+      // `scene.fog` is Fog | FogExp2; FogExp2 is the only one with `.density`.
+      // Narrow via a runtime property check (types are erased at runtime).
+      const fog = scene.fog;
+      if (fog && "density" in fog) {
+        (fog as unknown as THREE.FogExp2).density = THREE.MathUtils.lerp(
+          (fog as unknown as THREE.FogExp2).density,
+          0.085 - ss * 0.05,
+          0.04,
+        );
+      }
+
       renderer.render(scene, camera);
     };
     tick();

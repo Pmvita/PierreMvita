@@ -1,14 +1,15 @@
-import { Capabilities } from "@/components/skills/Capabilities"
-import { Contact } from "@/components/contact/Contact"
-import { Timeline } from "@/components/experience/Timeline"
-import { Hero } from "@/components/hero/Hero"
-import { SiteNav } from "@/components/nav/SiteNav"
-import { Scene } from "@/components/scene/Scene"
-import { WorkList } from "@/components/work/WorkList"
+import { Capabilities } from "@/components/skills/Capabilities";
+import { Contact } from "@/components/contact/Contact";
+import { Timeline } from "@/components/experience/Timeline";
+import { Hero } from "@/components/hero/Hero";
+import { SiteNav } from "@/components/nav/SiteNav";
+import { Scene } from "@/components/scene/Scene";
+import { WorkList } from "@/components/work/WorkList";
+import { ScrubProvider } from "@/components/layout/ScrubProvider";
 
 export default function Home() {
   return (
-    <>
+    <ScrubProvider>
       <Scene />
       <div className="site-content">
         <SiteNav />
@@ -20,6 +21,6 @@ export default function Home() {
           <Contact />
         </main>
       </div>
-    </>
-  )
+    </ScrubProvider>
+  );
 }

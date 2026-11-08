@@ -1,13 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const WebGLBackdrop = dynamic(
-  () =>
-    import("@/components/scene/WebGLBackdrop").then((mod) => mod.WebGLBackdrop),
-  { ssr: false },
-);
+import { useScrubContext } from "@/components/layout/ScrubProvider";
+import { WebGLBackdrop } from "./WebGLBackdrop";
 
 export function Scene() {
-  return <WebGLBackdrop />;
+  const { scrub } = useScrubContext();
+  return <WebGLBackdrop scrub={scrub} />;
 }
