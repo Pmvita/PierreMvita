@@ -28,6 +28,48 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
     targetScrubRef.current = scrub;
   }, [scrub]);
 
+  // ── Build procedural cloud texture once ──────────────────────────────
+  function buildCloudTexture(): THREE.Texture {
+    const size = 128;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, size, size);
+
+    // Draw overlapping cloud wisps, then blur for soft edges
+    const w = ctx.createImageData(size, size);
+    for (let y = 0; y < size; y += 4) {
+      for (let x = 0; x < size; x += 4) {
+        const px = x + (Math.random() - 0.5) * 40;
+        const py = y + (Math.random() - 0.5) * 40;
+        const r = 8 + Math.random() * 16;
+        const a = 0.15 + Math.random() * 0.35;
+        const dx = x - px;
+        const dy = y - py;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        const alpha = Math.max(0, 1 - (d / r) ** 1.5) * a;
+        if (alpha > 0) {
+          const i = (py * size + px) * 4;
+          w.data[i] = 255;
+          w.data[i + 1] = 255;
+          w.data[i + 2] = 255;
+          w.data[i + 3] = Math.min(255, Math.round(alpha * 255));
+        }
+      }
+    }
+    ctx.putImageData(w, 0, 0);
+    ctx.filter = "blur(6px)";
+    ctx.drawImage(canvas, 0, 0, size, size);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.anisotropy = 4;
+    return texture;
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -135,6 +177,47 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
     const atmosphere = new THREE.Mesh(sphereGeo, sphereMat);
     scene.add(atmosphere);
 
+    // ── Layer 5: interactive cloud field ─────────────────────────────────
+    const cloudTex = buildCloudTexture();
+    const cloudCount = 4;
+    const clouds: THREE.Mesh[] = [];
+    const cloudMaterials: THREE.Material[] = [];
+    const cloudPositions: THREE.Vector3[] = [];
+    const cloudRotations: THREE.Euler[] = [];
+    const cloudSpeeds: number[] = [];
+    const cloudScales: THREE.Vector3[] = [];
+
+    for (let i = 0; i < cloudCount; i += 1) {
+      const zDepth = -3 - i * 1.5;
+      const scale = 6 + i * 1.8;
+      const speed = 0.003 + i * 0.0012;
+      const driftOffset = (i % 3) * 2.2;
+
+      const geo = new THREE.PlaneGeometry(scale, scale * 0.45);
+      const mat = new THREE.MeshStandardMaterial({
+        map: cloudTex,
+        transparent: true,
+        opacity: 0.35,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+        roughness: 0.8,
+        metalness: 0.1,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set((driftOffset + i * 1.7) % 12, (i - 1.5) * 0.7, zDepth);
+      mesh.rotation.x = -0.08;
+      mesh.rotation.y = i * 0.5;
+      mesh.scale.set(1, 1, 1);
+
+      scene.add(mesh);
+
+      clouds.push(mesh);
+      cloudMaterials.push(mat);
+      cloudPositions.push(mesh.position);
+      cloudRotations.push(mesh.rotation);
+      cloudSpeeds.push(speed);
+      cloudScales.push(mesh.scale);
+    }
 
     // ── Interaction ──────────────────────────────────────────────────────
     const target = { x: 0, y: 0, scroll: 0 };
@@ -182,6 +265,54 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
         target.x * 0.08,
         0.04
       );
+
+      // ── Cloud field animation ──────────────────────────────────────────
+      for (let i = 0; i < clouds.length; i += 1) {
+        const mesh = clouds[i];
+        const speed = cloudSpeeds[i];
+        const drift = cloudPositions[i];
+        const rot = cloudRotations[i];
+        const scale = cloudScales[i];
+
+        // Base drift: clouds move left→right slowly, synced with scrub
+        const baseX = Math.sin(ss * 0.8 + i * 1.2) * 0.002;
+
+        // Cursor-driven tilt + yaw
+        const tiltY = target.y * 0.12 + ss * 0.15;
+        const tiltX = target.x * 0.06;
+
+        // Scroll-driven depth movement
+        const depthOffset = (i - 1.5) * 0.0006 * target.scroll;
+
+        // Update position
+        drift.x =
+          Math.sin(ss * 0.6 + i * 1.5) * 0.02 +
+          target.x * 0.04 +
+          depthOffset;
+        drift.y = Math.sin(ss * 0.4 + i * 0.9) * 0.015 + target.y * 0.02;
+        drift.z = -3 - i * 1.5 - ss * 0.05 + target.scroll * 0.04;
+
+        // Update rotation (tilt with cursor, sway with drift)
+        rot.x = -0.08 - target.y * 0.06 + ss * 0.01;
+        rot.y = i * 0.5 + target.x * 0.04 + ss * 0.008;
+        rot.z += (target.x * 0.02 + ss * 0.001);
+
+        // Cloud opacity breathing with scrub
+        const opacity = 0.32 + ss * 0.16;
+        cloudMaterials[i].opacity = THREE.MathUtils.lerp(
+          cloudMaterials[i].opacity,
+          opacity,
+          0.04
+        );
+
+        // Cloud scale: near clouds appear larger (with scrub depth)
+        const scaleVal = 1 + ss * 0.12 + target.scroll * 0.0004;
+        scale.set(
+          scaleVal,
+          1 + ss * 0.12 + target.scroll * 0.0004,
+          1
+        );
+      }
 
       // Camera: scroll lift + scrub depth
       const lift = ss * 1.8;
@@ -235,6 +366,12 @@ export function WebGLBackdrop({ scrub = 0 }: { scrub?: number }) {
       pMat.dispose();
       sphereGeo.dispose();
       sphereMat.dispose();
+      cloudTex.dispose();
+      for (let i = 0; i < clouds.length; i += 1) {
+        const mesh = clouds[i];
+        mesh.geometry.dispose();
+        cloudMaterials[i].dispose();
+      }
       renderer.dispose();
     };
   }, []);
