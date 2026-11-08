@@ -9,7 +9,7 @@ export function Hero() {
 
   // Baseline 3D lift driven by the hero scrub.
   const lift = Math.min(scrub * 18, 18);
-  const opacity = 0.55 + scrub * 0.45;
+  const opacity = 0.85 + scrub * 0.15;
 
   return (
     <section
